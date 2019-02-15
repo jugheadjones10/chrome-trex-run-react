@@ -1,0 +1,108 @@
+@keyframes jumpAnim {
+    0%   { margin-top:200px;}
+    12.5%{ margin-top:145px;}
+    25%  { margin-top:120px;}
+    37.5%{ margin-top:105px;}
+    50%  { margin-top:100px;}
+    62.5%{ margin-top:105px;}
+    75%  {margin-top:120px;}
+    87.5%{ margin-top:145px;}
+    100% { margin-top:200px;}
+}
+
+/* @keyframes groundAnim {
+    0%   { right:0px;}
+    50%  { right:680px;}
+    100% { right:1360px;}
+}
+@keyframes groundAnim2 {
+    0%   { right:-1360px;}
+    50%  { right:-680px;}
+    100% { right:0px;}
+} */
+
+
+.nothing{
+    z-index: 1;
+}
+.Dino{
+    animation-name: jumpAnim;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-play-state: unset;
+    z-index: 1;
+}
+.MovingGround{
+    position: absolute;
+    top: 220px;
+    z-index: -1;
+}
+
+/* .MovingGroundOne{
+    position: absolute;
+    top: 220px;
+    z-index: -1;
+
+    animation-name: groundAnim;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+}
+
+.MovingGroundTwo{
+    position: absolute;
+    top: 220px;
+    z-index: -1;
+
+    animation-name: groundAnim2;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+} */
+
+.MovingObs{
+    position: absolute;
+    z-index: 0;
+}
+
+#gameOverSign li{
+    display: inline-block;
+    width: 12%
+}
+
+#gameOverSign{
+    position: absolute;
+    top: 100px;
+    padding-left: 0px;
+    left: 50vw;
+    margin-left: -90px;
+    text-align: center;
+    width: 180px;
+}
+
+#theSpecialE{
+    padding-right: 4%
+}
+
+#playAgainSign{
+    position: absolute;
+    top: 120px;
+    left: 42%;
+    right: 42%;
+}
+
+#scoreKeep{
+    position: absolute;
+    top: 10px;
+    padding-left: 0px;
+    right: 5%;
+    width: 70px;
+    text-align: center;
+}
+
+#scoreKeep li{
+    display: inline-block;
+    width: 20%
+}
