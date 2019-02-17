@@ -6,90 +6,6 @@ import ScoreKeep from "./ScoreKeep"
 import logo from './logo.svg'
 import './App.css'
 
-
-
-// class App extends Component {
-//   constructor(){
-//     super()
-//     this.state = {
-//       playerOneNo : 0,
-//       playerTwoNo : 0,
-//       oneVisibility : "visible",
-//       twoVisibility :  "visible",
-//       winner : null
-//     }
-//     this.handleChange = this.handleChange.bind(this)
-//     this.handleClicker = this.handleClicker.bind(this)
-//     this.comparerBut = this.comparerBut.bind(this)
-//   }
-
-//   handleChange(event){
-//     var name = event.target.name
-//     this.setState({
-//       [name] : event.target.value
-//     })
-//   }
-
-//   handleClicker(event){
-//     var name = event.target.name
-//     this.setState({
-//       [name] : "hidden"
-//     })
-//   }
-  
-//   comparerBut(){
-//     if(this.state.playerOneNo > this.state.playerTwoNo){
-//       this.setState({
-//         winner : "Player One won"
-//       })
-//     }else if(this.state.playerTwoNo > this.state.playerOneNo){
-//       this.setState({
-//         winner : "Player Two won"
-//       })
-//     }else{
-//       this.setState({
-//         winner : "Tie bitcheS!!!"
-//       })
-//     }
-//     this.setState({
-//       oneVisibility : "visible",
-//       twoVisibility :  "visible",
-//       playerOneNo : 0,
-//       playerTwoNo : 0,
-//     })
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <input style={{visibility : this.state.oneVisibility}} name="playerOneNo" value={this.state.playerOneNo} onChange={this.handleChange}></input>
-
-//         <button name="oneVisibility" onClick={this.handleClicker}>Hide Player One</button>
-//         <input style={{visibility : this.state.twoVisibility}} name="playerTwoNo" value={this.state.playerTwoNo} onChange={this.handleChange}></input>
-
-//         <button name="twoVisibility" onClick={this.handleClicker}>Hide Player Two</button>
-//         <br/>
-//         <button onClick={this.comparerBut}>Find Winner!</button>
-//         <h1>{this.state.winner}</h1>
-//         {/* <header className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <p>
-//             Edit <code>src/App.js</code> and save to reload.
-//           </p>
-//           <a
-//             className="App-link"
-//             href="https://reactjs.org"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Learn React
-//           </a>
-//         </header> */}
-//       </div>
-//     )
-//   }  
-// }
-
 class App extends Component {
   constructor(){
     super()
@@ -109,7 +25,7 @@ class App extends Component {
   }
 
   spaceBarPress(e){
-    if(e.keyCode === 32){
+    if(e.keyCode === 32 || 38){
       this.setState(function(prevState){
         if(prevState.gameState == "beforeBegin"){
           this.interval = setInterval(() => this.tick(), 1000/this.state.groundSpeed)
@@ -122,10 +38,8 @@ class App extends Component {
             isGrounded: false
           }
         }
-
       })
     }
-
   }
 
   tick(){

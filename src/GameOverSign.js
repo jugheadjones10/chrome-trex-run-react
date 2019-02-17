@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import "./jumpAnim.css"
 
-import G from "./images/G.png"
-import A from "./images/A.png"
-import M from "./images/M.png"
-import E from "./images/E.png"
-import O from "./images/O.png"
-import V from "./images/V.png"
-import R from "./images/R.png"
+import G from "./images/letters/G.png"
+import A from "./images/letters/A.png"
+import M from "./images/letters/M.png"
+import E from "./images/letters/E.png"
+import O from "./images/letters/O.png"
+import V from "./images/letters/V.png"
+import R from "./images/letters/R.png"
 
 import playAgain from "./images/play-again.png"
 

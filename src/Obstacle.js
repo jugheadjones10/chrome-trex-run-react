@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import doubleCacti from "./images/double-cacti.png"
 import singleCactus from "./images/single-cactus.png"
 import rowCacti from "./images/row-cacti.png"
+import raptorUp from "./images/raptor-up.png"
+import raptorDown from "./images/raptor-down.png"
 import "./jumpAnim.css"
 
 class Obstacle extends Component {
@@ -12,21 +14,27 @@ class Obstacle extends Component {
             gameState : null,
             myCacti : [
                 {
-                    obs : doubleCacti,
-                    top : 201
+                    obs : rowCacti,
+                    top : 214
                 },
                 {
                     obs : singleCactus,
                     top : 201
                 },
                 {
-                    obs :   rowCacti,
-                    top : 214
+                    obs : doubleCacti,
+                    top : 201
+                },
+                {
+                    obs : raptorUp,
+                    top : Math.round(Math.random()*70 + 150)
                 }
-            ],
-            whichObsAmI : Math.round(Math.random()*2)
+            ]
         }
-
+        this.state = {
+            ...this.state,
+            meObj : this.state.myCacti[Math.round(Math.random()*4.5 - 0.9)]
+        }
         
     }
 
@@ -38,6 +46,17 @@ class Obstacle extends Component {
     }
     
     tick(){
+       
+        if(this.state.obsTicker % 100 == 0){
+            this.setState(function(prevState){
+                if(prevState.meObj.obs == raptorUp || prevState.meObj.obs == raptorDown){
+                    return{
+                        meObj : prevState.meObj.obs == raptorUp?{obs : raptorDown, top : prevState.meObj.top}:{obs : raptorUp, top : prevState.meObj.top}
+                    }
+                }
+            })
+        }
+        
         this.dinoRect = this.myDino.getBoundingClientRect()
         this.obstacleRect = this.myObstacle.getBoundingClientRect()
         this.setState({
@@ -60,13 +79,12 @@ class Obstacle extends Component {
     } 
 
     render(){
-
         return(
             <div>
                 <img 
                     id={this.props.myId}
-                    src={this.state.myCacti[this.state.whichObsAmI].obs} 
-                    style={{right: this.state.obsTicker, top: this.state.myCacti[this.state.whichObsAmI].top}} 
+                    src={this.state.meObj.obs}
+                    style={{right: this.state.obsTicker, top: this.state.meObj.top}} 
                     className="MovingObs" 
                     alt="Bkla">
                 </img>
