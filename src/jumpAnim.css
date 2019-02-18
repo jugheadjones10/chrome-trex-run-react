@@ -29,8 +29,8 @@
     animation-name: jumpAnim;
     animation-duration: 0.5s;
     animation-timing-function: linear;
-    animation-play-state: unset;
     z-index: 1;
+    animation-play-state: unset;
 }
 .MovingGround{
     position: absolute;

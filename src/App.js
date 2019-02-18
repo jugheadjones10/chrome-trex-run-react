@@ -3,7 +3,7 @@ import Dino from './Dino'
 import Ground from "./Ground"
 import GameOverSign from "./GameOverSign"
 import ScoreKeep from "./ScoreKeep"
-import logo from './logo.svg'
+import Obstacle from "./Obstacle"
 import './App.css'
 
 class App extends Component {
@@ -11,17 +11,21 @@ class App extends Component {
     super()
     this.state = {
       gameState : "beforeBegin",
-      isGrounded: true,
       appRightGround : 0,
-      beforeRunStart : true,
+      isGrounded: true,
       groundSpeed : 100,
-      scoreCounter : 0
+      scoreCounter : 0,
+      obstacleTicker : 0,
+      obsInterval : 150,
+      myObstaclesPlz : []
     }
+
     this.spaceBarPress = this.spaceBarPress.bind(this)
-    this.groundDino = this.groundDino.bind(this)
     this.checkGameOver = this.checkGameOver.bind(this)
     this.tick = this.tick.bind(this)
+    this.groundDino = this.groundDino.bind(this)
     this.restartOnPlayAgainPressed = this.restartOnPlayAgainPressed.bind(this)
+    this.destoryObsOnOut = this.destoryObsOnOut.bind(this)
   }
 
   spaceBarPress(e){
@@ -46,21 +50,33 @@ class App extends Component {
     this.setState(function(prevState){
       return{
           appRightGround : prevState.appRightGround + 5,
-          scoreCounter : prevState.scoreCounter + 1
+          scoreCounter : prevState.scoreCounter + 1,
+          obstacleTicker : prevState.obstacleTicker + 1,
       }
     })
-
-    
-
-    if(this.state.gameState == "gameOver"){
-      clearInterval(this.interval)
-    }
 
     if(this.state.appRightGround >= 1360){
       this.setState({
         appRightGround : 0
       })
     }
+
+    if(this.state.obstacleTicker == this.state.obsInterval){
+      this.setState(function(prevState){
+          var addition = [
+              <Obstacle 
+                  checkGameOver={this.checkGameOver}    
+                  myId={this.state.obstacleTicker}
+                  destroyOb={this.destoryObsOnOut} 
+              />
+          ]
+          return{
+              myObstaclesPlz: addition.concat(prevState.myObstaclesPlz),
+              obstacleTicker : 0,
+              obsInterval : Math.round((Math.random() * 110 + 40))
+          }
+      })
+    }    
   }
 
 
@@ -68,14 +84,18 @@ class App extends Component {
     if(
       dinoRect.right > obstacleRect.left &&
       dinoRect.left < obstacleRect.right -5 &&
-      dinoRect.bottom > obstacleRect.top 
+      dinoRect.bottom > obstacleRect.top &&
+      dinoRect.top < obstacleRect.bottom
     ){
-      this.setState({
-        gameState: "gameOver"
-      })
+      clearInterval(this.interval)
       if(!this.state.isGrounded){
         document.getElementById("dinoImg").style.animationPlayState = "paused"
       }
+      this.setState({
+        gameState: "gameOver",
+        obstacleTicker: 0,
+        obsInterval : 150
+      })
     }
 
     if(this.state.gameState == "gameOver"){
@@ -89,17 +109,19 @@ class App extends Component {
     this.setState({
       gameState: "inGame",
       isGrounded: true,
-      beforeRunStart : true,
       appRightGround : 0,
-      scoreCounter : 0
+      scoreCounter : 0,
+      myObstaclesPlz : []
     })
     document.getElementById("dinoImg").style.animationPlayState = "unset"
     this.interval = setInterval(() => this.tick(), 1000/this.state.groundSpeed)
   }
 
-  groundDino(){
-    this.setState({
-      isGrounded: true
+  destoryObsOnOut(){
+    this.setState(function(prevState){
+      return{
+        myObstaclesPlz : prevState.myObstaclesPlz.pop()
+      }
     })
   }
 
@@ -108,8 +130,15 @@ class App extends Component {
     document.getElementById("dinoImg").addEventListener("animationend", this.groundDino, false)
   }
 
+  groundDino(){
+    this.setState({
+      isGrounded: true
+    })
+  }
+
   componentWillUnmount(){
     document.removeEventListener("keydown", this.spaceBarPress, false);
+    clearInterval(this.interval)
   }
 
   render(){
@@ -119,7 +148,7 @@ class App extends Component {
         <Dino isGrounded={this.state.isGrounded} gameState={this.state.gameState}/>
         <GameOverSign gameState={this.state.gameState} changeHandler={this.restartOnPlayAgainPressed}/>
         <ScoreKeep scoreCounter={this.state.scoreCounter}/>
-        <Ground rightGround={this.state.appRightGround} checkGameOver={this.checkGameOver} gameState={this.state.gameState}/>
+        <Ground rightGround={this.state.appRightGround} myObstaclesPlz={this.state.myObstaclesPlz}/>
       </div>
     )
   }

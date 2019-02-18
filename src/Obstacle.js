@@ -27,13 +27,13 @@ class Obstacle extends Component {
                 },
                 {
                     obs : raptorUp,
-                    top : Math.round(Math.random()*70 + 150)
+                    top : Math.round(Math.random()*90 + 100)
                 }
             ]
         }
         this.state = {
             ...this.state,
-            meObj : this.state.myCacti[Math.round(Math.random()*4.5 - 0.9)]
+            meObj : this.state.myCacti[Math.round(Math.random()*3.5)]
         }
         
     }
@@ -75,6 +75,7 @@ class Obstacle extends Component {
 
         if(this.state.obsTicker >= 1360){
             clearInterval(this.interval)
+            this.props.destroyOb()
         }
     } 
 
