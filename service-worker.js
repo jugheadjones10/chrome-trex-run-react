@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/chrome-trex-run-react/precache-manifest.3c505a95b187e03c282feb5bc8e7f0f0.js"
+  "/chrome-trex-run-react/precache-manifest.555170b8cae71cfc2b365dc5099298b4.js"
 );
 
 workbox.clientsClaim();
