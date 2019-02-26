@@ -10,16 +10,11 @@
     100% { margin-top:200px;}
 }
 
-/* @keyframes groundAnim {
-    0%   { right:0px;}
-    50%  { right:680px;}
-    100% { right:1360px;}
-}
-@keyframes groundAnim2 {
-    0%   { right:-1360px;}
-    50%  { right:-680px;}
-    100% { right:0px;}
+/* @keyframes stuff{
+    0%   { src: "./images/dinosaur_left.png";}
+    50%  { src: "./images/dinosaur_right.png";}
 } */
+
 
 
 .nothing{
@@ -28,6 +23,13 @@
 .Dino{
     animation-name: jumpAnim;
     animation-duration: 0.5s;
+    animation-timing-function: linear;
+    z-index: 1;
+    animation-play-state: unset;
+}
+.DinoCrouch{
+    animation-name: jumpAnim;
+    animation-duration: 0.2s;
     animation-timing-function: linear;
     z-index: 1;
     animation-play-state: unset;

@@ -47,11 +47,11 @@ class Obstacle extends Component {
     
     tick(){
        
-        if(this.state.obsTicker % 100 == 0){
+        if(this.state.obsTicker % 100 === 0){
             this.setState(function(prevState){
-                if(prevState.meObj.obs == raptorUp || prevState.meObj.obs == raptorDown){
+                if(prevState.meObj.obs === raptorUp || prevState.meObj.obs === raptorDown){
                     return{
-                        meObj : prevState.meObj.obs == raptorUp?{obs : raptorDown, top : prevState.meObj.top}:{obs : raptorUp, top : prevState.meObj.top}
+                        meObj : prevState.meObj.obs === raptorUp?{obs : raptorDown, top : prevState.meObj.top}:{obs : raptorUp, top : prevState.meObj.top}
                     }
                 }
             })
@@ -63,7 +63,7 @@ class Obstacle extends Component {
             gameState: this.props.checkGameOver(this.dinoRect, this.obstacleRect)
         })
 
-        if(this.state.gameState == "gameOver"){
+        if(this.state.gameState === "gameOver"){
             clearInterval(this.interval)
         }
 
@@ -75,7 +75,7 @@ class Obstacle extends Component {
 
         if(this.state.obsTicker >= 1360){
             clearInterval(this.interval)
-            this.props.destroyOb()
+            
         }
     } 
 
